@@ -9,6 +9,8 @@ host = '127.0.0.1'
 port = 7976                                                             
 
 #socket initialization
+# socket.AF_INET means socket belong to IPV4 Family
+# socket.SOCK_STREAM means connection configured using TCP Protocol
 server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)              
 
 #binding host and port to socket
@@ -40,6 +42,10 @@ def handle(client):
             break
 
 #accepting multiple clients
+
+# During listening our server is waiting, therefore our code won't receive multiple SMS send from client 
+# To tackle this we need to apply multithreading, therefore I did the same to receiving method 
+# So as it can keep receiving independently without blocking the our app
 def receive():                                                          
     while True:
         client, address = server.accept()
